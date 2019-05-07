@@ -6,7 +6,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.render('index');
 });
 
 app.listen(3000, () => {
