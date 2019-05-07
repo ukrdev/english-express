@@ -1,0 +1,21 @@
+nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+
+  .container
+
+    a.navbar-brand(href='/') Navbar
+
+    button.navbar-toggler(
+      type='button',
+      data-toggle='collapse',
+      data-target='#header-nav',
+      aria-controls='header-nav',
+      aria-expanded='false',
+      aria-label='Toggle navigation'
+    )
+      span.navbar-toggler-icon
+
+    #header-nav.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/') Home 
+
