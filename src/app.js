@@ -44,6 +44,11 @@ app.get('/', (req, res) => {
 
 app.use('/register', require('./routes/register.js'));
 app.use('/login', require('./routes/login.js'));
+app.get('/logout', (req, res) => {
+  req.session.regenerate(function(err) {
+    res.redirect('/login');
+  })
+})
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!');
