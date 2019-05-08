@@ -50,7 +50,8 @@ router.post('/', (req, res, next) => {
     })
     .write()
     .then(() => {
-      res.redirect('/login');
+      req.session.user = id;
+      res.redirect('/');
     })
 
 }, render)
