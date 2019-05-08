@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
 
   req.session.user = exists.id
 
-  res.redirect(301, '/');
+  res.redirect('/');
 }, render);
 
 module.exports = router;
