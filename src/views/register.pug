@@ -1,0 +1,37 @@
+extends layouts/app
+
+block content
+  .row.justify-content-center
+    .col-md-3
+      .card
+        .card-header Register
+        .card-body
+          form(
+            method='post',
+            action=''
+          )
+
+            .form-group
+              label(for='name') E-mail
+              input#name.form-control(
+                type='email',
+                name='email',
+                class=errors.email ? 'is-invalid' : '',
+                value=old.email,
+                autofocus,
+                required
+              )
+              .invalid-feedback= errors.email
+
+            .form-group
+              label(for='password') Password
+              input#password.form-control(
+                type='password',
+                class=errors.password ? 'is-invalid' : ''
+                name='password'
+                required
+              )
+              .invalid-feedback= errors.password
+
+            .form-group.mb-0.text-right
+              button.btn.btn-primary Register

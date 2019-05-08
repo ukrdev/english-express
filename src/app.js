@@ -31,6 +31,8 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.use('/register', require('./routes/register.js'));
+
 app.listen(3000, () => {
   console.log('App listening on port 3000!');
 });
