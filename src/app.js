@@ -13,6 +13,8 @@ const adapter = new FileAsync(
 const db = low(adapter);
 
 db.then(database => {
+  global.db = database
+
   database.defaults({
     users: []
   }).write();
