@@ -1,0 +1,35 @@
+extends layouts/app
+
+block content
+  .row.justify-content-center
+    .col-md-3
+      .card
+        .card-header Login
+        .card-body
+          form(
+            method='post',
+            action=''
+          )
+
+            .form-group
+              label(for='email') E-mail
+              input#email.form-control(
+                type='email',
+                name='email',
+                class=errors.email ? 'is-invalid' : '',
+                value=old.email,
+                autofocus,
+              )
+              .invalid-feedback= errors.email
+
+            .form-group
+              label(for='password') Password
+              input#password.form-control(
+                type='password',
+                name='password',
+                class=errors.password ? 'is-invalid' : '',
+              )
+              .invalid-feedback= errors.password
+
+            .form-group.mb-0
+              button.btn.btn-primary(type='submit') Login
