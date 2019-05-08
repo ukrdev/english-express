@@ -40,10 +40,11 @@ router.post('/', (req, res, next) => {
   }
 
   // create user
+  let id = shortid.generate();
   global.db
     .get('users')
     .push({
-      id: shortid.generate(),
+      id: id,
       email: email,
       password: password
     })
