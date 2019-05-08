@@ -14,6 +14,7 @@ const db = low(adapter);
 
 db.then(database => {
   database.defaults({
+    users: []
   }).write();
 })
 
