@@ -50,7 +50,7 @@ router.post('/', (req, res, next) => {
     })
     .write()
     .then(() => {
-      res.redirect(301, '/')
+      res.redirect('/login');
     })
 
 }, render)
