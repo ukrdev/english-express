@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const shortid = require('shortid');
 
 router.use((req, res, next) => {
   res.locals.errors = {}
@@ -42,6 +43,7 @@ router.post('/', (req, res, next) => {
   global.db
     .get('users')
     .push({
+      id: shortid.generate(),
       email: email,
       password: password
     })
