@@ -12,13 +12,15 @@ block content
             input(type='hidden' name='_method' value='PATCH')
           .form-group
             label(for='question') Question
-            input#question.form-control(
-              type='text'
-              name='question'
-              value=('question' in old) ? old.question : ''
-              class=('question' in errors) ? 'is-invalid' : ''
-              autofocus
-            )
+            question-autocomplete
+              input#question.form-control(
+                type='text'
+                name='question'
+                value=('question' in old) ? old.question : ''
+                class=('question' in errors) ? 'is-invalid' : ''
+                autocomplete='off'
+                autofocus
+              )
             if 'question' in errors
               .invalid-feedback= errors.question
           .form-group
