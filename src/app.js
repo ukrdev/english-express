@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const methodOverride = require('method-override');
 
 // Database instance
 const low = require('lowdb');
@@ -34,6 +35,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+app.use(methodOverride(function (req, body) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    let { _method } = req.body;
+    delete req.body._method;
+    return _method;
+  }
+}));
 
 app.use((req, res, next) => {
   res.locals.isGuest = !req.session.user;
