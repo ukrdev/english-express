@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 
 // Middlewares
 function render(req, res) {
-  res.render('qa/form');
+  res.render('tickets/form');
 }
 
 function validation(req, res, next) {
@@ -63,7 +63,7 @@ function exists(req, res, next) {
 // Index
 router.get('/', (req, res) => {
   let items = global.db.get('tickets').value();
-  res.render('qa/index', {
+  res.render('tickets/index', {
     items: items
   });
 });
