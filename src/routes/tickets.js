@@ -13,6 +13,8 @@ router.use((req, res, next) => {
   res.locals.old = req.session.old || {};
   delete req.session.old;
 
+  res.locals.previous_tags = req.session.previous_tags || false;
+
   next();
 });
 
@@ -111,7 +113,13 @@ function inputTags(req, res, next) {
 // Create
 router.get('/create', render);
 router.post('/create', [validation, inputTags], (req, res) => {
-  let { question, answer } = req.body;
+  let { question, answer, save_previous_tags, tags } = req.body;
+
+  if (save_previous_tags) {
+    req.session.previous_tags = tags;
+  } else if ('previous_tags' in req.session) {
+    delete req.session.previous_tags;
+  }
 
   global.db.get('tickets')
     .unshift({

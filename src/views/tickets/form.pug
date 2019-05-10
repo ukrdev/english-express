@@ -33,14 +33,24 @@ block content
               .invalid-feedback= errors.answer
           .form-group
             label(for='tags') Tags
-            input#tags.form-control(
-              type='text'
-              name='tags'
-              value=('tags' in old) ? old.tags : ''
-              class=('tags' in errors) ? 'is-invalid' : ''
-            )
-            if 'tags' in errors
-              .invalid-feedback= errors.tags
+            .input-group
+              input#tags.form-control(
+                type='text'
+                name='tags'
+                value=('tags' in old) ? old.tags : (previous_tags || '')
+                class=('tags' in errors) ? 'is-invalid' : ''
+              )
+              if typeof model === 'undefined'
+                .input-group-append
+                  .input-group-text
+                    input#save-prev(
+                      type='checkbox'
+                      name='save_previous_tags'
+                      checked=previous_tags
+                    )
+                    label.m-0.ml-2(for='save-prev') Save previous input
+              if 'tags' in errors
+                .invalid-feedback= errors.tags
           .form-group.mb-0
             button.btn.btn-primary(type='submit')= typeof model !== 'undefined' ? 'Update' : 'Create'
 
