@@ -43,7 +43,7 @@ function validation(req, res, next) {
 }
 
 function exists(req, res, next) {
-  let exists = global.db.get('qa')
+  let exists = global.db.get('tickets')
     .find({ id: req.params.id })
     .value();
 
@@ -62,7 +62,7 @@ function exists(req, res, next) {
 
 // Index
 router.get('/', (req, res) => {
-  let items = global.db.get('qa').value();
+  let items = global.db.get('tickets').value();
   res.render('qa/index', {
     items: items
   });
@@ -73,7 +73,7 @@ router.get('/create', render);
 router.post('/create', validation, (req, res) => {
   let { question, answer } = req.body;
 
-  global.db.get('qa')
+  global.db.get('tickets')
     .unshift({
       id: shortid.generate(),
       question: question,
@@ -90,7 +90,7 @@ router.get('/update/:id', exists, render);
 router.patch('/update/:id', [exists, validation], (req, res, next) => {
   let { question, answer } = req.body
 
-  global.db.get('qa')
+  global.db.get('tickets')
     .find({ id: req.params.id })
     .assign({
       question: question,
@@ -104,7 +104,7 @@ router.patch('/update/:id', [exists, validation], (req, res, next) => {
 
 // Delete
 router.delete('/:id', exists, (req, res, next) => {
-  global.db.get('qa')
+  global.db.get('tickets')
     .remove({ id: req.params.id })
     .write()
     .then(() => {
