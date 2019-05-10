@@ -32,6 +32,7 @@ block content
             th Date/Time
             th Tags
             th Score
+            th Details
         tbody
           each exam in exams
             tr
@@ -43,3 +44,5 @@ block content
                   span.badge.badge-primary= tags.find(t => t.id === etag).name
                   | &nbsp;
               td= exam.score.correct + '/' + exam.score.total
+              td
+                a.btn.btn-dark.btn-sm(href='/exam/' + exam.id) Details
