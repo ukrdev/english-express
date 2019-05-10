@@ -1,0 +1,36 @@
+extends ../layouts/app
+
+block content
+  .container
+    .card
+      .card-body
+        form(
+          method='post'
+          action=''
+        )
+          if typeof model !== 'undefined'
+            input(type='hidden' name='_method' value='PATCH')
+          .form-group
+            label(for='question') Question
+            input#question.form-control(
+              type='text'
+              name='question'
+              value=('question' in old) ? old.question : ''
+              class=('question' in errors) ? 'is-invalid' : ''
+              autofocus
+            )
+            if 'question' in errors
+              .invalid-feedback= errors.question
+          .form-group
+            label(for='answer') Answer
+            input#answer.form-control(
+              type='text'
+              name='answer'
+              value=('answer' in old) ? old.answer : ''
+              class=('answer' in errors) ? 'is-invalid' : ''
+            )
+            if 'answer' in errors
+              .invalid-feedback= errors.answer
+          .form-group.mb-0
+            button.btn.btn-primary(type='submit')= typeof model !== 'undefined' ? 'Update' : 'Create'
+

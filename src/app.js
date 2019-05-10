@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.use('/qa', require('./routes/qa.js'));
 app.use('/register', require('./routes/register.js'));
 app.use('/login', require('./routes/login.js'));
 app.get('/logout', (req, res) => {

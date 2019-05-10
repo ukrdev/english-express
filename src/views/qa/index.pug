@@ -1,0 +1,27 @@
+extends ../layouts/app
+
+block content
+  .container
+    .card
+      .card-body
+        .d-flex.align-items-center
+          h5.card-title.mb-0 Questions/Answers
+          .ml-auto
+            a.btn.btn-primary(href="/qa/create") Create
+      table.table
+        thead
+          tr
+            th Question
+            th Answer
+            th(style="width: 150px;") Action
+        tbody
+          each item in items
+            tr
+              td= item.question
+              td= item.answer
+              td.d-flex
+                a.btn.btn-primary.btn-sm(href='/qa/update/' + item.id) Edit
+                form(method='post' action='/qa/' + item.id onsubmit="return confirm('Are you sure?')")
+                  input(type='hidden' name='_method' value='DELETE')
+                  | &nbsp;
+                  button.btn.btn-danger.btn-sm(type='submit') Delete
