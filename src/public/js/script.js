@@ -78,5 +78,9 @@ Vue.component('question-autocomplete', {
 const app = new Vue({
   el: '#app',
   mounted() {
+    let el = document.querySelector('[autofocus]');
+    if (el) {
+      el.focus()
+    }
   }
 });
