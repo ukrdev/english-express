@@ -138,7 +138,7 @@ function ticket (req, res, next) {
       })
       .write()
       .then(() => {
-        res.redirect('/')
+        res.redirect('/exam/' + exam.id)
       })
     return;
   }
