@@ -31,6 +31,16 @@ block content
             )
             if 'answer' in errors
               .invalid-feedback= errors.answer
+          .form-group
+            label(for='tags') Tags
+            input#tags.form-control(
+              type='text'
+              name='tags'
+              value=('tags' in old) ? old.tags : ''
+              class=('tags' in errors) ? 'is-invalid' : ''
+            )
+            if 'tags' in errors
+              .invalid-feedback= errors.tags
           .form-group.mb-0
             button.btn.btn-primary(type='submit')= typeof model !== 'undefined' ? 'Update' : 'Create'
 

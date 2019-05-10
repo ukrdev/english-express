@@ -17,7 +17,11 @@ block content
         tbody
           each item in items
             tr
-              td= item.question
+              td
+                div= item.question
+                each itag in item.tags
+                  span.badge.badge-primary= tags.find(t => t.id === itag).name
+                  | &nbsp;
               td= item.answer
               td.d-flex
                 a.btn.btn-primary.btn-sm(href='/tickets/update/' + item.id) Edit

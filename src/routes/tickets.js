@@ -54,7 +54,14 @@ function exists(req, res, next) {
   res.locals.model = exists;
 
   if (Object.entries(res.locals.old).length === 0) {
-    res.locals.old = exists;
+    res.locals.old = Object.assign({}, exists);
+    res.locals.old.tags = global.db.get('tags')
+      .filter(tag => {
+        return exists.tags.indexOf(tag.id) !== -1;
+      })
+      .map(tag => tag.name)
+      .value()
+      .join(', ');
   }
 
   next();
@@ -63,21 +70,55 @@ function exists(req, res, next) {
 // Index
 router.get('/', (req, res) => {
   let items = global.db.get('tickets').value();
+  let tags = global.db.get('tags').value();
   res.render('tickets/index', {
+    tags: tags,
     items: items
   });
 });
 
+function inputTags(req, res, next) {
+  let { tags } = req.body;
+  let dbTags = global.db.get('tags').value();
+
+  res.locals.tags = tags.split(',')
+    .map(t => t.trim())
+    .filter(t => !!t)
+    .map(inputTag => {
+      let dbTag = dbTags.find(dbTag => {
+        return dbTag.name.toLocaleLowerCase() === inputTag.toLowerCase();
+      });
+
+      if (typeof dbTag !== 'undefined') {
+        return dbTag.id;
+      }
+
+      let id = shortid.generate();
+      global.db.get('tags')
+        .unshift({
+          id: id,
+          name: inputTag
+        })
+        .write()
+        .then(() => {});
+
+      return id;
+    });
+
+  next();
+}
+
 // Create
 router.get('/create', render);
-router.post('/create', validation, (req, res) => {
+router.post('/create', [validation, inputTags], (req, res) => {
   let { question, answer } = req.body;
 
   global.db.get('tickets')
     .unshift({
       id: shortid.generate(),
       question: question,
-      answer: answer
+      answer: answer,
+      tags: res.locals.tags
     })
     .write()
     .then(() => {
@@ -87,14 +128,15 @@ router.post('/create', validation, (req, res) => {
 
 // Update
 router.get('/update/:id', exists, render);
-router.patch('/update/:id', [exists, validation], (req, res, next) => {
+router.patch('/update/:id', [exists, validation, inputTags], (req, res, next) => {
   let { question, answer } = req.body
 
   global.db.get('tickets')
     .find({ id: req.params.id })
     .assign({
       question: question,
-      answer: answer
+      answer: answer,
+      tags: res.locals.tags
     })
     .write()
     .then(() => {
