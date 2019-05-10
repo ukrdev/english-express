@@ -21,6 +21,7 @@ db.then(database => {
   database.defaults({
     exams: [],
     exam_tickets: [],
+    tags: [],
     tickets: [],
     users: []
   }).write();
