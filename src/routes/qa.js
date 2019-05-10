@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const shortid = require('shortid');
+const auth = require('../middleware/auth.js');
+
+router.use(auth);
 
 // Common middleware
 router.use((req, res, next) => {
