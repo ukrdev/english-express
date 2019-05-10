@@ -19,6 +19,7 @@ db.then(database => {
   global.db = database
 
   database.defaults({
+    qa: [],
     users: []
   }).write();
 })
