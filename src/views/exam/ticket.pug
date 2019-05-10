@@ -1,0 +1,22 @@
+extends ../layouts/app
+
+block content
+  .container
+    .card
+      .card-body
+        h5.card-title= ticket.question
+        form(action='/exam/answer', method='post')
+          .form-group
+            label(for='answer') Your answer
+            input.form-control(
+              type='text'
+              name='answer'
+              class=('answer' in errors) ? 'is-invalid' : ''
+              value='',
+              autofocus,
+              autocomplete='off'
+            )
+            if 'answer' in errors
+              .invalid-feedback= errors.answer
+          .form-group.mb-0
+            button.btn.btn-primary(type='submit') Send

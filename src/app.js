@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/tickets', require('./routes/tickets.js'));
+app.use('/exam', require('./routes/exam.js'));
 app.use('/register', require('./routes/register.js'));
 app.use('/login', require('./routes/login.js'));
 app.get('/logout', (req, res) => {
