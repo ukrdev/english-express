@@ -4,6 +4,24 @@ block content
   .container
     form(method='post', action='exam/start')
       button.btn.btn-success.btn-lg(type='submit') Start
+      a.btn.btn-link(
+        data-toggle='collapse'
+        href='#tags'
+        role='button'
+        aria-expanded='false'
+        aria-controls='tags'
+      ) Tags
+      #tags.collapse
+        each tag in tags
+          .form-check.form-check-inline
+            - var id = 'tag-' + tag.id
+            input.form-check-input(
+              type='checkbox'
+              name='tags'
+              id=id
+              value=tag.id
+            )
+            label.form-check-label(for=id)= tag.name
 
     .card.mt-3
       .card-body
@@ -12,9 +30,16 @@ block content
         thead
           tr
             th Date/Time
+            th Tags
             th Score
         tbody
           each exam in exams
             tr
               td= new Date(exam.created_at).toLocaleString()
+              td
+                if exam.tags.length === 0
+                  span.badge.badge-dark All
+                each etag in exam.tags
+                  span.badge.badge-primary= tags.find(t => t.id === etag).name
+                  | &nbsp;
               td= exam.score.correct + '/' + exam.score.total

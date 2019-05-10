@@ -56,8 +56,11 @@ app.get('/', (req, res) => {
   let exams = global.db.get('exams')
     .filter({ user_id: req.session.user })
     .value();
+  let tags = global.db.get('tags')
+    .value();
 
   res.render('index', {
+    tags: tags,
     exams: exams
   });
 });

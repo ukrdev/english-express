@@ -33,6 +33,11 @@ router.post('/start', (req, res, next) => {
   next();
 }, (req, res) => {
   const { db } = global;
+  let { tags } = req.body;
+
+  tags = Array.isArray(tags)
+    ? tags
+    : (!!tags ? [tags] : []);
 
   let id = shortid.generate();
   db.get('exams')
@@ -40,6 +45,7 @@ router.post('/start', (req, res, next) => {
       id: id,
       user_id: req.session.user,
       status: STATUS_PASSING,
+      tags: tags,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       score: {
@@ -50,17 +56,29 @@ router.post('/start', (req, res, next) => {
     .write()
     .then(() => {
 
-      let tickets = db.get('tickets').value().map(ticket => {
-        return {
-          id: shortid.generate(),
-          exam_id: id,
-          ticket_id: ticket.id,
-          question: ticket.question,
-          correct_answer: ticket.answer,
-          user_answer: null,
-          is_correct: null,
-        };
-      });
+      let tickets = db.get('tickets').value()
+        .filter(ticket => {
+          if (!tags.length) {
+            return true;
+          }
+          for (let i = 0; i < ticket.tags.length; i++) {
+            if (tags.indexOf(ticket.tags[i]) !== -1) {
+              return true;
+            }
+          }
+          return false;
+        })
+        .map(ticket => {
+          return {
+            id: shortid.generate(),
+            exam_id: id,
+            ticket_id: ticket.id,
+            question: ticket.question,
+            correct_answer: ticket.answer,
+            user_answer: null,
+            is_correct: null,
+          };
+        });
 
       db.get('exam_tickets')
         .push(...tickets)
