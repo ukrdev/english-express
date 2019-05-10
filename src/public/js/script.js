@@ -27,6 +27,7 @@ Vue.component('question-autocomplete', {
           this.prevItem();
           break;
         case 13: // enter
+        case 9: // tab
           // do nothing
           break;
         default:
@@ -35,6 +36,12 @@ Vue.component('question-autocomplete', {
     });
     input.addEventListener('keydown', event => {
       switch (event.keyCode) {
+        case 9:
+          if (this.display === true) {
+            event.preventDefault();
+            this.nextItem();
+          }
+          break;
         case 13:
           if (this.current !== null) {
             window.location = '/tickets/update/' + this.items[this.current].id;
