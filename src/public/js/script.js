@@ -76,5 +76,7 @@ Vue.component('question-autocomplete', {
   }
 });
 const app = new Vue({
-  el: '#app'
+  el: '#app',
+  mounted() {
+  }
 });
