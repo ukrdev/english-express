@@ -13,5 +13,8 @@
     "pug": "^2.0.3",
     "session-file-store": "^1.2.0",
     "shortid": "^2.2.14"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }
