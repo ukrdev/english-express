@@ -21,10 +21,7 @@ Vue.component('question-autocomplete', {
     input.addEventListener('keyup', event => {
       switch (event.keyCode) {
         case 40: // arrow down
-          this.current++;
-          if (this.current > this.items.length - 1) {
-            this.current = 0;
-          }
+          this.nextItem();
           break;
         case 38: // arrow up
           this.current--;
@@ -63,6 +60,12 @@ Vue.component('question-autocomplete', {
     }
   },
   methods: {
+    nextItem() {
+      this.current++;
+      if (this.current > this.items.length - 1) {
+        this.current = 0;
+      }
+    },
     search(query) {
       if (!query) {
         this.items = [];
