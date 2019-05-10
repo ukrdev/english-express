@@ -79,6 +79,17 @@ router.get('/', (req, res) => {
   });
 });
 
+// Search
+router.get('/search', (req, res) => {
+  let tickets = global.db.get('tickets')
+    .filter(ticket => {
+      return ticket.question.toLowerCase().indexOf(req.query.q.toLowerCase()) !== -1;
+    })
+    .take(5)
+    .value();
+  res.json(tickets);
+})
+
 function inputTags(req, res, next) {
   let { tags } = req.body;
   let dbTags = global.db.get('tags').value();
