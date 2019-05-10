@@ -24,10 +24,7 @@ Vue.component('question-autocomplete', {
           this.nextItem();
           break;
         case 38: // arrow up
-          this.current--;
-          if (this.current < 0) {
-            this.current = this.items.length - 1;
-          }
+          this.prevItem();
           break;
         case 13: // enter
           // do nothing
@@ -64,6 +61,12 @@ Vue.component('question-autocomplete', {
       this.current++;
       if (this.current > this.items.length - 1) {
         this.current = 0;
+      }
+    },
+    prevItem() {
+      this.current--;
+      if (this.current < 0) {
+        this.current = this.items.length - 1;
       }
     },
     search(query) {
