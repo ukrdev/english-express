@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "dev": "nodemon ./src/app.js",
     "start": "node ./src/app.js"
   },
   "private": true,
