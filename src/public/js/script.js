@@ -34,11 +34,13 @@ Vue.component('question-autocomplete', {
       }
     });
     input.addEventListener('keydown', event => {
-      if (event.keyCode === 13) { // enter
-        if (this.current !== null) {
-          window.location = '/tickets/update/' + this.items[this.current].id;
-          event.preventDefault();
-        }
+      switch (event.keyCode) {
+        case 13:
+          if (this.current !== null) {
+            window.location = '/tickets/update/' + this.items[this.current].id;
+            event.preventDefault();
+          }
+          break;
       }
     })
     window.addEventListener('click', e => {
