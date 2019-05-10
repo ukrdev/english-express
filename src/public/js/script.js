@@ -64,6 +64,11 @@ Vue.component('question-autocomplete', {
   },
   methods: {
     search(query) {
+      if (!query) {
+        this.items = [];
+        this.display = false;
+        return;
+      }
       fetch('/tickets/search?q=' + query)
         .then(response => response.json())
         .then(json => {
