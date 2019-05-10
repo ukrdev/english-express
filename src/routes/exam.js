@@ -196,6 +196,8 @@ router.get('/:id', (req, res, next) => {
       throw new Error('Exam not found');
     }
 
+    res.locals.exam = exam;
+
     next();
 }, (req, res) => {
   const { db } = global;
