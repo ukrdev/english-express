@@ -185,4 +185,30 @@ router.post('/answer', [exam, ticket], (req, res, next) => {
     });
 })
 
+router.get('/:id', (req, res, next) => {
+  const { db } = global;
+
+  let exam = db.get('exams')
+    .find({ id: req.params.id })
+    .value();
+
+    if (!exam) {
+      throw new Error('Exam not found');
+    }
+
+    next();
+}, (req, res) => {
+  const { db } = global;
+
+  const tickets = db.get('exam_tickets')
+    .filter({
+      exam_id: req.params.id
+    })
+    .value();
+
+  res.render('exam/view', {
+    tickets: tickets
+  });
+})
+
 module.exports = router;

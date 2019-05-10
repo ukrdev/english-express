@@ -1,0 +1,11 @@
+extends ../layouts/app
+
+block content
+  .container
+    each ticket in tickets
+      .card.mb-3
+        .card-body
+          h6.card-title= ticket.question
+          if !ticket.is_correct
+            .form-control.is-invalid.mb-3= ticket.user_answer
+          .form-control.is-valid= ticket.correct_answer
