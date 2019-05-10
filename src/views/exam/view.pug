@@ -2,6 +2,9 @@ extends ../layouts/app
 
 block content
   .container
+    .d-flex.align-item-center.justify-content-between
+      h2 Correct #{exam.score.correct} of #{exam.score.total}
+      h4= new Date(exam.created_at).toLocaleString()
     each ticket in tickets
       .card.mb-3
         .card-body
