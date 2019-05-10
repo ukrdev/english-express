@@ -68,6 +68,7 @@ router.post('/start', (req, res, next) => {
           }
           return false;
         })
+        .sort(() => Math.random() - 0.5)
         .map(ticket => {
           return {
             id: shortid.generate(),
