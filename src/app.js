@@ -52,7 +52,13 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.render('index');
+  let exams = global.db.get('exams')
+    .filter({ user_id: req.session.user })
+    .value();
+
+  res.render('index', {
+    exams: exams
+  });
 });
 
 app.use('/tickets', require('./routes/tickets.js'));

@@ -4,3 +4,17 @@ block content
   .container
     form(method='post', action='exam/start')
       button.btn.btn-success.btn-lg(type='submit') Start
+
+    .card.mt-3
+      .card-body
+        h5.card-title.mb-0 Results
+      table.table
+        thead
+          tr
+            th Date/Time
+            th Score
+        tbody
+          each exam in exams
+            tr
+              td= new Date(exam.created_at).toLocaleString()
+              td= exam.score.correct + '/' + exam.score.total
