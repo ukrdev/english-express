@@ -19,7 +19,6 @@ Vue.component('question-autocomplete', {
   mounted: function () {
     let input = this.$slots.default[0].elm;
     input.addEventListener('keyup', event => {
-      console.log(event.keyCode)
       switch (event.keyCode) {
         case 40: // arrow down
           this.current++;
