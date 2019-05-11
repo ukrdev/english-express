@@ -35,6 +35,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   cookie: {
+    maxAge: 60 * 60 * 24 * 365 * 1000
   },
   store: new FileStore(),
   secret: 'keyboard cat',
