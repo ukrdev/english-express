@@ -30,6 +30,7 @@ block content
               name='answer'
               value=('answer' in old) ? old.answer : ''
               class=('answer' in errors) ? 'is-invalid' : ''
+              autocomplete='off'
             )
             if 'answer' in errors
               .invalid-feedback= errors.answer
