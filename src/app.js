@@ -34,6 +34,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
+  cookie: {
+  },
   store: new FileStore(),
   secret: 'keyboard cat',
   resave: false,
