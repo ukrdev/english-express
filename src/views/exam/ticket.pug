@@ -10,7 +10,7 @@ block content
             h5.card-title  #{passed}/#{total}
         form(action='/exam/answer', method='post')
           .form-group
-            input.form-control(
+            input.form-control.form-control-lg(
               type='text'
               name='answer'
               class=('answer' in errors) ? 'is-invalid' : ''
