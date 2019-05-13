@@ -5,7 +5,7 @@ block content
     .card
       .card-body
         .d-flex.align-items-center.mb-1
-          h5.card-title= ticket.question
+          h4.card-title= ticket.question
           .ml-auto
             h5.card-title  #{passed}/#{total}
         form(action='/exam/answer', method='post')
