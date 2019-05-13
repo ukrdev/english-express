@@ -144,6 +144,18 @@ function ticket (req, res, next) {
   }
 
   res.locals.ticket = ticket;
+  res.locals.total = db.get('exam_tickets')
+    .filter({
+      exam_id: exam.id
+    })
+    .size();
+  res.locals.left = db.get('exam_tickets')
+    .filter({
+      exam_id: exam.id,
+      is_correct: null
+    })
+    .size();
+  res.locals.passed = res.locals.total - res.locals.left;
 
   next();
 }

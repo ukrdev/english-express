@@ -4,7 +4,10 @@ block content
   .container
     .card
       .card-body
-        h5.card-title= ticket.question
+        .d-flex.align-items-center
+          h5.card-title= ticket.question
+          .ml-auto
+            h5.card-title  #{passed}/#{total}
         form(action='/exam/answer', method='post')
           .form-group
             label(for='answer') Your answer
