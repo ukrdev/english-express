@@ -5,6 +5,16 @@ Vue.component('question-autocomplete', {
       <div class="dropdown-menu" :style="style">
         <a v-for="(item, index) in items" class="dropdown-item" :class="{active: current === index}" :href="'/tickets/update/' + item.id">
           {{ item.question }}
+          <div>
+            <span
+              v-for="tagLabel in item.tagLabels"
+              class="badge"
+              :class="getTagStyle(tagLabel, index)"
+              style="margin-right: 4px;"
+            >
+              {{ tagLabel }}
+            </span>
+          </div>
         </a>
       </div>
     </div>
@@ -66,6 +76,17 @@ Vue.component('question-autocomplete', {
     }
   },
   methods: {
+    getTagStyle(label, index) {
+       if (index === this.current) {
+        return {
+          'badge-light': true
+        }
+      } else {
+        return {
+          'badge-primary': true
+        }
+      }
+    },
     nextItem() {
       this.current++;
       if (this.current > this.items.length - 1) {
