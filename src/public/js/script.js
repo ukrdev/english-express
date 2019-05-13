@@ -21,6 +21,7 @@ Vue.component('question-autocomplete', {
   `,
   data: function () {
     return {
+      tagsInput: [],
       display: false,
       current: 0,
       items: []
@@ -64,6 +65,12 @@ Vue.component('question-autocomplete', {
       this.display = false;
       this.current = null;
     })
+
+    let tagsInput = document.querySelector('#tags');
+    this.tagsInput = tagsInput.value.split(',').map(i => i.trim());
+    tagsInput.addEventListener('keyup', e => {
+      this.tagsInput = tagsInput.value.split(',').map(i => i.trim());
+    })
   },
   computed: {
     style: function () {
@@ -77,7 +84,11 @@ Vue.component('question-autocomplete', {
   },
   methods: {
     getTagStyle(label, index) {
-       if (index === this.current) {
+      if (this.tagsInput.indexOf(label) !== -1) {
+        return {
+          'badge-warning': true
+        }
+      } else if (index === this.current) {
         return {
           'badge-light': true
         }
