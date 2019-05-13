@@ -4,9 +4,9 @@ block content
   .container
     .card
       .card-body
-        form(method='post', action='exam/start')
+        form.d-flex(method='post', action='exam/start')
           button.btn.btn-success.btn-lg(type='submit') Start
-          div
+          div.ml-4
             each tag in tags
               .form-check.form-check-inline
                 - var id = 'tag-' + tag.id
