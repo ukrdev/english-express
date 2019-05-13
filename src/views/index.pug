@@ -6,14 +6,7 @@ block content
       .card-body
         form(method='post', action='exam/start')
           button.btn.btn-success.btn-lg(type='submit') Start
-          a.btn.btn-link(
-            data-toggle='collapse'
-            href='#tags'
-            role='button'
-            aria-expanded='false'
-            aria-controls='tags'
-          ) Tags
-          #tags.collapse
+          div
             each tag in tags
               .form-check.form-check-inline
                 - var id = 'tag-' + tag.id
