@@ -87,7 +87,15 @@ router.get('/search', (req, res) => {
     })
     .take(5)
     .value();
-  res.json(tickets);
+  let tags = global.db.get('tags').value();
+    res.json(tickets.map(ticket => {
+      ticket.tagLabels = ticket.tags.map(tag => {
+        return tags.find(t => {
+          return t.id === tag;
+        }).name;
+      })
+      return ticket;
+    }));
 })
 
 function inputTags(req, res, next) {
