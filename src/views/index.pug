@@ -2,26 +2,28 @@ extends layouts/app
 
 block content
   .container
-    form(method='post', action='exam/start')
-      button.btn.btn-success.btn-lg(type='submit') Start
-      a.btn.btn-link(
-        data-toggle='collapse'
-        href='#tags'
-        role='button'
-        aria-expanded='false'
-        aria-controls='tags'
-      ) Tags
-      #tags.collapse
-        each tag in tags
-          .form-check.form-check-inline
-            - var id = 'tag-' + tag.id
-            input.form-check-input(
-              type='checkbox'
-              name='tags'
-              id=id
-              value=tag.id
-            )
-            label.form-check-label(for=id)= tag.name
+    .card
+      .card-body
+        form(method='post', action='exam/start')
+          button.btn.btn-success.btn-lg(type='submit') Start
+          a.btn.btn-link(
+            data-toggle='collapse'
+            href='#tags'
+            role='button'
+            aria-expanded='false'
+            aria-controls='tags'
+          ) Tags
+          #tags.collapse
+            each tag in tags
+              .form-check.form-check-inline
+                - var id = 'tag-' + tag.id
+                input.form-check-input(
+                  type='checkbox'
+                  name='tags'
+                  id=id
+                  value=tag.id
+                )
+                label.form-check-label(for=id)= tag.name
 
     .card.mt-3
       .card-body
