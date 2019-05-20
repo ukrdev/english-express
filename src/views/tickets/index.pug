@@ -29,3 +29,15 @@ block content
                   input(type='hidden' name='_method' value='DELETE')
                   | &nbsp;
                   button.btn.btn-danger.btn-sm(type='submit') Delete
+      div
+        nav
+          - var p = 1;
+          ul.pagination
+            while p <= pages
+              li.page-item(
+                class= current == p ? 'active' : ''
+              )
+                a.page-link(href="/tickets?page=" + p)= p
+                - p++
+
+

@@ -73,9 +73,16 @@ function exists(req, res, next) {
 router.get('/', (req, res) => {
   let items = global.db.get('tickets').value();
   let tags = global.db.get('tags').value();
+  let page = req.query.page || 1;
+  const total = items.length;
+  const limit = 20;
+  const offset = (page - 1) * limit
+  
   res.render('tickets/index', {
     tags: tags,
-    items: items
+    current: page,
+    pages: Math.ceil(total / limit),
+    items: items.slice(offset, offset + limit)
   });
 });
 
