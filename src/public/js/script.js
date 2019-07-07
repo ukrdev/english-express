@@ -135,3 +135,28 @@ const app = new Vue({
     }
   }
 });
+
+window.deleteNote = function (link) {
+  const confirmation = confirm('Are you sure?');
+  if (!confirmation) {
+    return false;
+  }
+
+  const url = link.href;
+
+  const form = document.createElement('form');
+  form.action = url;
+  form.method = 'post';
+
+  const requestMethod = document.createElement('input');
+  requestMethod.type = 'hidden';
+  requestMethod.name = '_method';
+  requestMethod.value = 'DELETE';
+  form.append(requestMethod);
+
+  document.body.append(form);
+
+  form.submit();
+
+  return false;
+}

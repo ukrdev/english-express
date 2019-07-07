@@ -19,6 +19,7 @@ db.then(database => {
   global.db = database
 
   database.defaults({
+    notes: [],
     exams: [],
     exam_tickets: [],
     tags: [],
@@ -68,6 +69,7 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/notes', require('./routes/notes.js'));
 app.use('/tickets', require('./routes/tickets.js'));
 app.use('/exam', require('./routes/exam.js'));
 app.use('/register', require('./routes/register.js'));

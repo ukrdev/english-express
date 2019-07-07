@@ -1,0 +1,20 @@
+extends ../layouts/app
+
+block content
+  .container
+    .d-flex.align-items-center
+      h5.card-title.mb-0 Notes
+      .ml-auto
+        a.btn.btn-success(href="/notes/create" tabindex='1' autofocus) Create
+
+    each note in notes
+      .card.mt-3
+        .card-body
+          h5.card-title= note.title
+          pre.card-text= note.content
+          a.card-link(href='/notes/edit/' + note.id) Edit
+          a.card-link.text-danger(
+            onclick=`return window.deleteNote(this)`
+            href="/notes/delete/" + note.id
+          ) Delete
+

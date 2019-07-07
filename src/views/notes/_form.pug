@@ -1,0 +1,23 @@
+.form-group
+  label(for='title') Title
+  input#title.form-control(
+    type='text'
+    name='title'
+    value=('title' in old) ? old.title : ''
+    class=('title' in errors) ? 'is-invalid' : ''
+    autocomplete='off'
+    autofocus
+  )
+  if 'title' in errors
+    .invalid-feedback= errors.title
+.form-group
+  label(for='content') Content
+  textarea#content.form-control(
+    type='text'
+    name='content'
+    class=('content' in errors) ? 'is-invalid' : ''
+    autocomplete='off'
+    rows=12
+  )= ('content' in old) ? old.content : ''
+  if 'content' in errors
+    .invalid-feedback= errors.content
