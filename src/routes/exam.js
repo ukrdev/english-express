@@ -216,7 +216,8 @@ router.get('/:id', (req, res, next) => {
 
   const tickets = db.get('exam_tickets')
     .filter({
-      exam_id: req.params.id
+      exam_id: req.params.id,
+      is_correct: false
     })
     .value();
 
