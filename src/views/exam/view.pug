@@ -12,7 +12,7 @@ block content
           if !ticket.is_correct
             .form-control.is-invalid.mb-3
               each word in ticket.user_answer.split(' ')
-                - var exp = '(\\s|^)' + word + '(\\s|$)';
+                - var exp = '(\\s|^)' + word.replace('?', '\\?') + '(\\s|$)';
                 if ticket.correct_answer.search(new RegExp(exp, 'i')) === -1
                   span.bg-danger.text-white= word
                 else
@@ -20,7 +20,7 @@ block content
                 | &nbsp;
           .form-control.is-valid
               each word in ticket.correct_answer.split(' ')
-                - var exp = word + '(\\s|$)';
+                - var exp = word.replace('?', '\\?') + '(\\s|$)';
                 if ticket.user_answer.search(new RegExp(exp, 'i')) === -1
                   span.bg-success.text-white= word
                 else
